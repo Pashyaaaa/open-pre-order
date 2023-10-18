@@ -15,7 +15,7 @@ app.use(express.static(publicDirectory));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.set("view engine", "hbs");
+app.set("view engine", "hbs")
 
 const db = mysql.createConnection({
   host: process.env.DATABASE_HOST,

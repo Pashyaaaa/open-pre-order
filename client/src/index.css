@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .img_thumbnail {
+    @apply w-max rounded-2xl border-2 border-slate-300 p-1 overflow-hidden
+  }
+
+  /* CARD */
+  .card_product_group {
+    @apply mt-2 flex flex-col gap-2
+  }
+
+  .card_product {
+    @apply flex items-center justify-between
+  }
+  
+  .cta_price_product {
+    @apply flex items-center justify-between text-xs mt-2
+  }
+
+  .cta_price_product_button {
+    @apply bg-green-900 px-1 rounded-lg text-white
+  }
+
+  .price_product {
+    @apply text-green-900 text-base font-medium
+  }
+  /* AKHIR CARD */
+}

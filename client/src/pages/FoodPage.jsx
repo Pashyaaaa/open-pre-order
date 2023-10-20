@@ -1,4 +1,4 @@
-import CardFood from "../components/cards/FoodCard/CardFood";
+import CardFoodDetail from "../components/cards/FoodCardDetail/CardFoodDetail";
 
 const FoodPage = () => {
   return (
@@ -8,12 +8,9 @@ const FoodPage = () => {
       </h2>
       <p className="text-sm ms:text-xs">Pilih dan Pesan Makanan Yang Mau Kamu Pesan</p>
       <div className="card_product_group">
-        <CardFood />
-        <CardFood />
-        <CardFood />
-        <CardFood />
+        <CardFoodDetail />
       </div>
-      <button type="button" className="mt-5">Konfirmasi Pesanan</button>
+      <button type="button" className="w-full mt-5">Pesan Makanan</button>
     </>
   )
 }

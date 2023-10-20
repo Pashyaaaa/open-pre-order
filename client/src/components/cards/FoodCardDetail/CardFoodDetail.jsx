@@ -2,22 +2,30 @@ import { useState } from "react"
 import Card from "../Card"
 
 const CardFoodDetail = ({ food }) => {
-  const [price, setPrice] = useState(20000)
-  const [newPrice, setNewPrice] = useState(price)
-  const [totalProduct, setTotalProduct] = useState(1)
+  const price = 10000
+  const [newPrice, setNewPrice] = useState()
+  const [totalProduct, setTotalProduct] = useState(0)
 
   function handleLessTotalProduct() {
-    if(totalProduct === 1) {
+    if(totalProduct === 0) {
       return
     } else {
       setTotalProduct(totalProduct - 1)
-      setNewPrice(n => n - price)
+      setNewPrice(() => {
+        let sum = newPrice.toString().replace('.', '')
+        let sum2 = +sum
+        let result = sum2 - price
+        return result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+      })
     }
   }
 
   function handleAddTotalProduct() {
     setTotalProduct(totalProduct + 1)
-    setNewPrice(n => n + price)
+    setNewPrice(() => {
+      let num = price * (totalProduct + 1)
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    })
   }
 
   return (
@@ -39,7 +47,7 @@ const CardFoodDetail = ({ food }) => {
           </button>
         </div>
         <div className="price_product">
-          <span>Rp. {newPrice}</span>
+          <span>{ totalProduct !== 0 ? `Rp. ${newPrice}` : ''}</span>
         </div>
       </div>
     </Card>

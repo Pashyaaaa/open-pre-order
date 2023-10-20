@@ -1,15 +1,12 @@
-import ConfirmProductPage from "./pages/FoodPageConfirm";
-import { createContext } from "react";
+import ConfirmFoodPage from "./pages/ConfirmFoodPage";
 import FoodPage from "./pages/FoodPage";
-import PaymentMethodpage from "./pages/PaymentMethodPage";
 
 const App = () => {
   return (
     <>
       <main className="max-w-xl px-4 mx-auto">
-        <FoodPage />
-        {/* <ConfirmProductPage /> */}
-        {/* <PaymentMethodpage /> */}
+        {/* <FoodPage /> */}
+        <ConfirmFoodPage />
       </main>
     </>
   );

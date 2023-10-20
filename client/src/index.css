@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  input[type="checkbox"] {
+    /* @apply w-6 h-6 mt-2 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 */
+  }
+
+  button[type="button"] {
+    @apply focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800
+  }
+}
+
 @layer components {
   .img_thumbnail {
     @apply w-max rounded-2xl border-2 border-slate-300 p-1 overflow-hidden
@@ -9,7 +19,7 @@
 
   /* CARD */
   .card_product_group {
-    @apply mt-2 flex flex-col gap-2
+    @apply mt-4 flex flex-col gap-2
   }
 
   .card_product {
@@ -25,7 +35,7 @@
   }
 
   .price_product {
-    @apply text-green-900 text-base font-medium
+    @apply text-green-900 text-base font-medium ms:text-sm
   }
   /* AKHIR CARD */
 }

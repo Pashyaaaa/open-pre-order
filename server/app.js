@@ -1,40 +1,23 @@
 const express = require("express");
-const mysql = require("mysql");
-const dotenv = require("dotenv");
-const path = require("path");
+const db = require("./routes/db-config");
 const app = express();
-const router = require("./routes/pages");
-const authRouter = require("./routes/auth");
+const cookie = require("cookie-parser");
+const PORT = process.env.PORT || 5000;
 
-dotenv.config({
-  path: "./.env",
-});
-
-const publicDirectory = path.join(__dirname, "./public");
-app.use(express.static(publicDirectory));
-app.use(express.urlencoded({ extended: false }));
+app.use("/js", express.static(__dirname + "/public/js"));
+app.use("/css", express.static(__dirname + "/public/css"));
+app.set("view engine", "ejs");
+app.set("views", "./views");
+app.use(cookie());
 app.use(express.json());
-
-app.set("view engine", "hbs")
-
-const db = mysql.createConnection({
-  host: process.env.DATABASE_HOST,
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE,
-});
-
 db.connect((err) => {
   if (err) {
-    console.log(err);
-  } else {
-    console.log("MySQL Connected...");
+    return console.log(err);
   }
+  console.log("Database Connected");
 });
-
-app.use("/", router);
-app.use("/auth", authRouter);
-
-app.listen(3000, () => {
+app.use("/", require("./routes/pages"));
+app.use("/api", require("./controllers/auth"));
+app.listen(PORT, () => {
   console.log("Server Is Running in 3000");
 });

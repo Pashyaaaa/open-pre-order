@@ -1,23 +1,26 @@
-const express = require("express");
-const db = require("./routes/db-config");
+import express from "express";
 const app = express();
-const cookie = require("cookie-parser");
-const PORT = process.env.PORT || 5000;
+import dotenv from "dotenv";
+import db from "./config/db.js";
+import router from "./routes/index.js";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+dotenv.config();
+const PORT = 5000;
 
-app.use("/js", express.static(__dirname + "/public/js"));
-app.use("/css", express.static(__dirname + "/public/css"));
-app.set("view engine", "ejs");
-app.set("views", "./views");
-app.use(cookie());
-app.use(express.json());
-db.connect((err) => {
-  if (err) {
-    return console.log(err);
-  }
+try {
+  await db.authenticate();
   console.log("Database Connected");
-});
-app.use("/", require("./routes/pages"));
-app.use("/api", require("./controllers/auth"));
+} catch (error) {
+  console.error(error);
+}
+
+// react js defaultnya adalah 3000
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cookieParser());
+app.use(express.json());
+app.use(router);
+
 app.listen(PORT, () => {
-  console.log("Server Is Running in 3000");
+  console.log("Server Is Running in 5000");
 });

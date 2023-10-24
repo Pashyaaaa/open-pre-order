@@ -1,13 +1,12 @@
-const Card = ({ children: element, foodName }) => {
+const Card = ({ children: element, pageName }) => {
   return (
     <figure className="card_product">
       <div className="w-[30%]">
         <div className="img_thumbnail">
-          <img src="assets/nasgor.jpg" alt="image product" className="w-20 h-20 rounded-xl ms:w-16 ms:h-16" />
+          <img src="assets/nasgor.jpg" alt="image product" className="object-cover w-20 h-24 rounded-xl ms:w-16 ms:h-20" />
         </div>
       </div>
       <figcaption className="w-[70%]">
-        <h4 className="text-2xl font-semibold truncate ms:text-base">{foodName}</h4>
         {element}
       </figcaption>
     </figure>

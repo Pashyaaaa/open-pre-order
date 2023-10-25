@@ -22,5 +22,5 @@ app.use(express.json());
 app.use(router);
 
 app.listen(PORT, () => {
-  console.log("Server Is Running in 5000");
+  console.log(`Server Is Running in ${PORT}`);
 });

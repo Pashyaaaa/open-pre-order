@@ -1,15 +1,15 @@
 GET http://localhost:5000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsIm5hbWUiOiJzYW5kaGlrYSIsImVtYWlsIjoiZW1haWxAZ21haWwuY29tIiwiaWF0IjoxNjk4MTI1ODk2LCJleHAiOjE2OTgxMjU5MTZ9.9O6Z5Ap40_fJpmlmQjcauLl5uv6AQr0oIL3IcPqDHSE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsIm5hbWUiOiJzYW5kaGlrYSIsImVtYWlsIjoiZW1haWxAZ21haWwuY29tIiwiaWF0IjoxNjk4MTI4OTc2LCJleHAiOjE2OTgxMjg5OTZ9.6lTEfKirfGtw-jmDEczHBUQP0Ol2RY7M5ashkVgbwEc
 
 ###
 POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "name": "sandhika",
+    "name": "user3",
     "email": "email@gmail.com",
     "password": "123",
-    "confPassword": "1234"
+    "confPassword": "123"
 }
 
 ###
@@ -27,3 +27,33 @@ GET http://localhost:5000/token
 ###
 DELETE http://localhost:5000/logout
 
+
+# CATALOG
+
+###
+GET http://localhost:5000/catalog
+
+###
+GET http://localhost:5000/catalog/2
+
+###
+POST http://localhost:5000/catalog
+Content-Type: application/json
+
+{
+    "nama_produk": "Nasi Kuning",
+    "gambar": "nasikuning.jpg",
+    "harga": "12000",
+    "publish": "0"
+}
+
+###
+PATCH http://localhost:5000/catalog/2
+Content-Type: application/json
+
+{
+    "harga": "20000"
+}
+
+###
+DELETE http://localhost:5000/catalog/2

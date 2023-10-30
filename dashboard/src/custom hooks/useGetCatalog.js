@@ -7,7 +7,9 @@ const useGetCatalog = (id) => {
   const [catalogs, setCatalogs] = useState([])
   const [catalog, setCatalog] = useState({
     nama_produk: '',
-    harga: ''
+    gambar: '',
+    harga: '',
+    publish: 1
   })
 
   useEffect(() => {

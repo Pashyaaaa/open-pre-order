@@ -2,6 +2,7 @@ import express from "express";
 import { getUsers, Register, Login, Logout } from "../controllers/Users.js";
 import {
   getCatalog,
+  getAllCatalog,
   getCatalogById,
   createCatalog,
   updateCatalog,
@@ -21,6 +22,7 @@ router.delete("/logout", Logout);
 
 // Catalog
 router.get("/catalog", getCatalog);
+router.get("/catalog/all", getAllCatalog);
 router.get("/catalog/:id", getCatalogById);
 router.post("/catalog", createCatalog);
 router.patch("/catalog/:id", updateCatalog);

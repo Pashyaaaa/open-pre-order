@@ -28,32 +28,32 @@ GET http://localhost:5000/token
 DELETE http://localhost:5000/logout
 
 
-# CATALOG
+# CATALOG -----------------------------------------------------------------
 
 ###
 GET http://localhost:5000/catalog
 
 ###
-GET http://localhost:5000/catalog/2
+GET http://localhost:5000/catalog/3
 
 ###
 POST http://localhost:5000/catalog
 Content-Type: application/json
 
 {
-    "nama_produk": "Nasi Kuning",
-    "gambar": "nasikuning.jpg",
-    "harga": "12000",
-    "publish": "0"
+    "nama_produk": "Nasi Uduk",
+    "gambar": "nasiuduk.jpg",
+    "harga": "11000",
+    "publish": "1"
 }
 
 ###
-PATCH http://localhost:5000/catalog/2
+PATCH http://localhost:5000/catalog/1
 Content-Type: application/json
 
 {
-    "harga": "20000"
+    "harga": "15000"
 }
 
 ###
-DELETE http://localhost:5000/catalog/2
+DELETE http://localhost:5000/catalog/5

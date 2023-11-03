@@ -90,7 +90,7 @@ export const updateCatalog = async (req, res) => {
   }
   let fileName = "";
   if (req.files === null) {
-    fileName = Product.image;
+    fileName = catalog.gambar;
   } else {
     const file = req.files.file;
     const fileSize = file.data.length;

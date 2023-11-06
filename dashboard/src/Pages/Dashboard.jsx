@@ -2,10 +2,23 @@ import axios from "axios"
 import DefaultTemplate from "../Templates/DefaultTemplate"
 import { useEffect, useState } from "react"
 import useFetch from '../custom hooks/useFetch'
+import CatalogDashList from "../components/CatalogDashList"
 
 const Dashboard = () => {
   const { name } = useFetch()
   const [catalogs, setCatalogs] = useState([])
+
+  const sortedCatalogs = [...catalogs].sort((a, b) => {
+    // Urutkan berdasarkan nilai publish terlebih dahulu
+    if (a.publish < b.publish) return 1;
+    if (a.publish > b.publish) return -1;
+  
+    // Jika nilai publish sama, urutkan berdasarkan ID (atau kunci lain jika diperlukan)
+    if (a.id < b.id) return -1;
+    if (a.id > b.id) return 1;
+  
+    return 0; // Jika publish dan ID sama
+  });
 
   useEffect(() => {
     getCatalogs()
@@ -18,57 +31,33 @@ const Dashboard = () => {
 
   return (
     <DefaultTemplate>
-      <h1 className="text-4xl font-bold mt-20">Welcome to Dashboard <span className="text-sky-800">{name}</span></h1>
-      <h2 className="text-2xl font-semibold mt-10">Overview Catalog</h2>
-      <div className="relative overflow-x-auto mt-5">
-        <table className="w-full text-base text-left dark:text-gray-400">
-          <thead className="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                No
-              </th>
-              <th scope="col" className="px-6 py-3">
-                ID
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Nama Produk
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Harga
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Status
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              catalogs.map((catalog, i) => (
-              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={catalog.id}>
-                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  {i + 1}
-                </th>
-                <td className="px-6 py-4">
-                  {catalog.id}
-                </td>
-                <td className="px-6 py-4">
-                  <span className={catalog.publish ? '' : 'text-gray-500 italic line-through'}>
-                    {catalog.nama_produk}
-                  </span>
-                </td>
-                <td className="px-6 py-4">
-                  <span className={catalog.publish ? '' : 'text-gray-500 italic line-through'}>
-                    Rp {catalog.harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                  </span>
-                </td>
-                <td className="px-6 py-4">
-                  <span className={`font-semibold ${catalog.publish ? '' : 'text-red-600'}`}>{catalog.publish ? 'Published' : 'Unpublished'}</span>
-                </td>
+      <div className="pt-24">
+        <h1 className="text-4xl font-bold mb-4">Welcome to Dashboard <span className="text-sky-800">{name}</span></h1>
+        <h2 className="text-2xl font-semibold">Overview Catalog</h2>
+        <div className="relative overflow-x-auto mt-5">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col" className="px-6 py-3">No</th>
+                <th scope="col" className="px-6 py-3">ID</th>
+                <th scope="col" className="px-6 py-3">Nama Produk</th>
+                <th scope="col" className="px-6 py-3">Harga</th>
+                <th scope="col" className="px-6 py-3">Status</th>
               </tr>
-              ))
-            }
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {sortedCatalogs.length === 0 ? (
+                <tr>
+                  <td className='text-center text-3xl font-semibold p-20' colSpan={7}>
+                    Belum ada catalog yang tersedia
+                  </td>
+                </tr>
+              ) : (
+                <CatalogDashList sortedCatalogs={sortedCatalogs} />
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </DefaultTemplate>
   )

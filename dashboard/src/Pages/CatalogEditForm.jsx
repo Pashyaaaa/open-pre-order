@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DefaultTemplate from '../Templates/DefaultTemplate'
 import axios from 'axios'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 const CatalogEditForm = () => {
   const navigate = useNavigate()
@@ -54,46 +54,40 @@ const CatalogEditForm = () => {
 
   return (
     <DefaultTemplate>
-      <div className='pt-20 max-w-xl mx-auto'>
-        <h1 className='text-4xl font-semibold mb-5'>Edit Catalog</h1>
-        <form onSubmit={editCatalog} className='mx-auto'>
+      <div className='pt-20 max-w-lg mx-auto'>
+        <div className='flex justify-between items-center'>
+          <h1 className="text-3xl font-bold mb-6">Ubah Catalog</h1>
+          <Link to={'/catalog'} className="pill_badge_red">Batalkan</Link>
+        </div>
+        <form onSubmit={editCatalog} className='w-full'>
           <div className="mb-6">
             <label
-              htmlFor="nama_produk"
-              className="block mb-2 text-base font-medium text-gray-900 dark:text-white">
-              Nama Produk
-            </label>
+              htmlFor="nama_produk">Nama Produk</label>
             <input
               type="text"
               id="nama_produk"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className='form_input'
               required
               value={nama_produk}
               onChange={e => setNama_Produk(e.target.value)} />
           </div>
           <div className="mb-6">
             <label
-              htmlFor="harga"
-              className="block mb-2 text-base font-medium text-gray-900 dark:text-white">
-              Harga Produk
-              </label>
+              htmlFor="harga">Harga Produk</label>
             <input
               type="number"
               id="harga"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className='form_input'
               required
               value={harga}
               onChange={e => setHarga(e.target.value)} />
           </div>
           <div className="mb-6">
             <label
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              htmlFor="file_input">
-              Upload file
-            </label>
+              htmlFor="file_input">Upload file</label>
             {previewImg ? (<img className="h-auto max-w-lg rounded-lg mb-6 w-40" src={previewImg} alt="Preview Image Product" />) : ''}
             <input
-              className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+              className="form_file"
               id="file_input"
               type="file"
               onChange={loadImage} />
@@ -105,13 +99,10 @@ const CatalogEditForm = () => {
                 type="radio"
                 value='1'
                 name='status'
-                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                className='form_radio'
                 onChange={e => setPublish(e.target.value)} />
               <label
-                htmlFor="published"
-                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                Publish
-              </label>
+                htmlFor="published" className='m-0'>Publish</label>
             </div>
             <div className="flex items-center">
               <input
@@ -119,20 +110,17 @@ const CatalogEditForm = () => {
                 type="radio"
                 value='0'
                 name='status'
-                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                className="form_radio"
                 onChange={e => setPublish(e.target.value)} />
               <label
                 htmlFor="unpublished"
-                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                className="m-0">
                 Unpublish
               </label>
             </div>
           </div>
           <button
-            type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Submit
-          </button>
+            type="submit" className='form_button'>Ubah Catalog</button>
         </form>
       </div>
     </DefaultTemplate>

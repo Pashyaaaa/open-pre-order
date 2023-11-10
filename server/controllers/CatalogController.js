@@ -1,4 +1,5 @@
-import Catalog from "../models/CatalogModel.js";
+import db from "../models/index.js";
+const Catalog = db.models.catalog;
 import path from "path";
 import fs from "fs";
 
@@ -17,7 +18,9 @@ export const getCatalog = async (req, res) => {
 
 export const getAllCatalog = async (req, res) => {
   try {
-    const response = await Catalog.findAll();
+    const response = await Catalog.findAll({
+      include: [db.models.order_detail],
+    });
     res.status(200).json(response);
   } catch (error) {
     console.log(error.message);
@@ -90,7 +93,7 @@ export const updateCatalog = async (req, res) => {
   }
   let fileName = "";
   if (req.files === null) {
-    fileName = Product.image;
+    fileName = catalog.gambar;
   } else {
     const file = req.files.file;
     const fileSize = file.data.length;

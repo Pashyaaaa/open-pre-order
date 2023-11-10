@@ -1,25 +1,11 @@
-import { Sequelize } from "sequelize";
-import db from "../config/db.js";
+import { DataTypes } from "sequelize";
 
-const { DataTypes } = Sequelize;
-
-const Catalog = db.define(
-  "catalog",
-  {
-    nama_produk: DataTypes.STRING,
-    gambar: DataTypes.STRING,
-    url: DataTypes.STRING,
-    harga: DataTypes.INTEGER,
-    publish: DataTypes.BOOLEAN,
-  },
-  {
-    freezeTableName: true,
-  }
-);
+const Catalog = {
+  nama_produk: DataTypes.STRING,
+  gambar: DataTypes.STRING,
+  url: DataTypes.STRING,
+  harga: DataTypes.INTEGER,
+  publish: DataTypes.BOOLEAN,
+};
 
 export default Catalog;
-
-// fungsi dibawah digunakan untuk men-generete table jika tabel catalog tidak terdapat didatabase
-(async () => {
-  await db.sync();
-})();

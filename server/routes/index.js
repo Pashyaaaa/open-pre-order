@@ -1,5 +1,10 @@
 import express from "express";
+//Users
 import { getUsers, Register, Login, Logout } from "../controllers/Users.js";
+import { verifyToken } from "../middleware/VerifyToken.js";
+import { refreshToken } from "../controllers/RefreshToken.js";
+
+// Catalog
 import {
   getCatalog,
   getAllCatalog,
@@ -8,8 +13,20 @@ import {
   updateCatalog,
   deleteCatalog,
 } from "../controllers/CatalogController.js";
-import { verifyToken } from "../middleware/VerifyToken.js";
-import { refreshToken } from "../controllers/RefreshToken.js";
+
+// Order
+import {
+  getOrder,
+  getOrderById,
+  addOrder,
+  deleteOrder,
+} from "../controllers/OrderController.js";
+
+// Order Detail
+import {
+  getOrderDetail,
+  getOrderDetailById,
+} from "../controllers/OrderDetailController.js";
 
 const router = express.Router();
 
@@ -27,5 +44,15 @@ router.get("/catalog/:id", getCatalogById);
 router.post("/catalog", createCatalog);
 router.patch("/catalog/:id", updateCatalog);
 router.delete("/catalog/:id", deleteCatalog);
+
+//Order
+router.get("/order", getOrder);
+router.get("/order/:id", getOrderById);
+router.post("/order", addOrder);
+router.delete("/order/:id", deleteOrder);
+
+//Order Detail
+router.get("/orderdetail", getOrderDetail);
+router.get("/orderdetail/:id", getOrderDetailById);
 
 export default router;

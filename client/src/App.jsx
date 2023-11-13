@@ -1,38 +1,38 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import ConfirmFoodPage from "./pages/ConfirmFoodPage";
 import FoodPage from "./pages/FoodPage";
-
-const foods = [
-  {
-    id: 1,
-    name: 'Nasi Goreng',
-    price: 10000
-  },
-  {
-    id: 2,
-    name: 'Mie Goreng',
-    price: 10000
-  },
-  {
-    id: 3,
-    name: 'Mie Kuah',
-    price: 10000
-  }
-]
+import axios from 'axios'
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import FormUser from "./pages/FormUser";
 
 export const FoodsContext = createContext(null)
 export const CartContext = createContext(null)
 
 const App = () => {
   const [cart, setCart] = useState([])
+  const [catalogs, setCatalogs] = useState([])
+
+  useEffect(() => {
+    getCatalogs()
+  }, [])
+
+  const getCatalogs = async () => {
+    const response = await axios.get('http://localhost:5000/catalog/all')
+    setCatalogs(response.data)
+  }
 
   return (
     <>
       <main className="max-w-xl px-4 mx-auto">
-        <FoodsContext.Provider value={foods}>
+        <FoodsContext.Provider value={catalogs}>
           <CartContext.Provider value={{cart, setCart}}>
-            <FoodPage />
-            <ConfirmFoodPage />
+            <Router>
+              <Routes>
+                <Route path="/" element={<FoodPage />} />
+                <Route path="/confirm-order" element={<ConfirmFoodPage />} />
+                <Route path="/form-data-user" element={<FormUser />} />
+              </Routes>
+            </Router>
           </CartContext.Provider>
         </FoodsContext.Provider>
       </main>

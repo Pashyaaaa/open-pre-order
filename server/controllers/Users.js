@@ -1,4 +1,5 @@
-import Users from "../models/index.js";
+import db from "../models/index.js";
+const Users = db.models.users;
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 

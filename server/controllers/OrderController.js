@@ -72,14 +72,9 @@ export const deleteOrder = async (req, res) => {
 };
 
 export const addOrder = async (req, res) => {
-  const {
-    nama,
-    whatsapp,
-    alamat,
-    tanggal_order,
-    tanggal_ambil,
-    order_details,
-  } = req.body;
+  const { nama, whatsapp, alamat, tanggal_order, tanggal_ambil, order_detail } =
+    req.body;
+
   try {
     const order = await Order.create({
       nama: nama,
@@ -90,21 +85,29 @@ export const addOrder = async (req, res) => {
     });
 
     // Loop through each order_detail and create a record
-    for (const detail of order_details) {
+    for (const detail of order_detail) {
+      // Fetch the associated catalog for the order_detail
+      const catalogData = await Catalog.findOne({
+        where: { id: detail.catalog_id },
+      });
+
+      // Calculate the harga based on the original harga and jumlah
+      const calculatedHarga = catalogData.harga * detail.jumlah;
+
       const createdDetail = await OrderDetail.create({
         jumlah: detail.jumlah,
-        harga: detail.harga,
+        harga: calculatedHarga, // Set harga sesuai dengan perhitungan di atas
         catalog_id: detail.catalog_id,
         order_id: order.id,
       });
 
       // Fetch the associated catalog for the created order_detail
-      const catalogData = await Catalog.findOne({
+      const updatedCatalogData = await Catalog.findOne({
         where: { id: createdDetail.catalog_id },
       });
 
-      // Assign the catalog data to the created order_detail
-      createdDetail.catalog = catalogData;
+      // Assign the updated catalog data to the created order_detail
+      createdDetail.catalog = updatedCatalogData;
     }
 
     // Fetch the associated order_details for the created order

@@ -2,6 +2,8 @@ import db from "../models/index.js";
 const Order = db.models.order;
 const OrderDetail = db.models.order_detail;
 const Catalog = db.models.catalog;
+import "dotenv/config";
+import midtransClient from "midtrans-client";
 
 export const getOrder = async (req, res) => {
   try {
@@ -84,6 +86,9 @@ export const addOrder = async (req, res) => {
       tanggal_ambil: tanggal_ambil,
     });
 
+    // Inisialisasi total harga
+    let totalHarga = 0;
+
     // Loop through each order_detail and create a record
     for (const detail of order_detail) {
       // Fetch the associated catalog for the order_detail
@@ -94,9 +99,12 @@ export const addOrder = async (req, res) => {
       // Calculate the harga based on the original harga and jumlah
       const calculatedHarga = catalogData.harga * detail.jumlah;
 
+      // Tambahkan harga ke total
+      totalHarga += calculatedHarga;
+
       const createdDetail = await OrderDetail.create({
         jumlah: detail.jumlah,
-        harga: calculatedHarga, // Set harga sesuai dengan perhitungan di atas
+        harga: calculatedHarga,
         catalog_id: detail.catalog_id,
         order_id: order.id,
       });
@@ -118,9 +126,43 @@ export const addOrder = async (req, res) => {
     // Assign the order_details data to the created order
     order.order_details = orderDetailsData;
 
+    //? PAYMENT
+    let snap = new midtransClient.Snap({
+      // Set to true if you want Production Environment (accept real transaction).
+      isProduction: false,
+      serverKey: process.env.SERVER_KEY,
+      clientKey: process.env.CLIENT_KEY,
+    });
+
+    const order_id = `CustOrder_${Date.now()}_${Math.floor(
+      Math.random() * 1000
+    )}`;
+    let parameter = {
+      transaction_details: {
+        order_id: order_id,
+        gross_amount: totalHarga,
+      },
+      credit_card: {
+        secure: true,
+      },
+      customer_details: {
+        first_name: nama,
+        phone: whatsapp,
+        address: alamat,
+      },
+    };
+
+    snap.createTransaction(parameter).then((transaction) => {
+      // transaction token
+      let transactionToken = transaction.token;
+      console.log("transactionToken:", transactionToken);
+    });
+
+    // Mengembalikan total harga bersama dengan pesanan
     res.json({
       message: "Pesanan Berhasil",
-      order: order, // Mengembalikan data pesanan beserta order_details
+      order: order,
+      totalHarga: totalHarga,
     });
   } catch (error) {
     console.log(error);

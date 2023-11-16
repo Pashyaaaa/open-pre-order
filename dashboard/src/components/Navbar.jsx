@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
   const location = useLocation()
@@ -18,10 +18,10 @@ const Navbar = () => {
   return (
     <nav>
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="/dashboard" className="flex items-center">
+        <Link to="/dashboard" className="flex items-center">
           <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
-        </a>
+        </Link>
         <div className="flex md:order-2">
           <button className="navbar_button_logout" onClick={Logout}>Log out</button>
           <button
@@ -39,16 +39,16 @@ const Navbar = () => {
         <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
           <ul className="navbar_list">
             <li>
-              <a href="/dashboard" className={`navbar_list_item ${location.pathname === '/dashboard' ? 'text-blue-700' : ''}`}>Home</a>
+              <Link to="/dashboard" className={`navbar_list_item ${location.pathname === '/dashboard' ? 'text-blue-700' : ''}`}>Home</Link>
             </li>
             <li>
-              <a href="/catalog" className={`navbar_list_item ${location.pathname === '/catalog' ? 'text-blue-700' : ''}`}>Catalog</a>
+              <Link to="/catalog" className={`navbar_list_item ${location.pathname === '/catalog' ? 'text-blue-700' : ''}`}>Catalog</Link>
             </li>
             <li>
-              <a href="#" className={`navbar_list_item ${location.pathname === '/order' ? 'text-blue-700' : ''}`}>Order</a>
+              <Link to="/order" className={`navbar_list_item ${location.pathname === '/order' ? 'text-blue-700' : ''}`}>Order</Link>
             </li>
             <li>
-              <a href="/users" className={`navbar_list_item ${location.pathname === '/users' ? 'text-blue-700' : ''}`}>Users</a>
+              <Link to="/users" className={`navbar_list_item ${location.pathname === '/users' ? 'text-blue-700' : ''}`}>Users</Link>
             </li>
           </ul>
         </div>

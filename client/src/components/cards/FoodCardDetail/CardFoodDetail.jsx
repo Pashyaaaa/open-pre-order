@@ -14,7 +14,7 @@ const CardFoodDetail = ({ catalog }) => {
     } else if(totalProduct === 1) {
       setTotalProduct(totalProduct - 1)
       setCart(
-        cart.filter(item => item.id !== id)
+        cart.filter(item => item.catalog_id !== id)
       )
     } else {
       setTotalProduct(totalProduct - 1)
@@ -25,9 +25,9 @@ const CardFoodDetail = ({ catalog }) => {
         return result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
       })
 
-      if(cart.find(item => item.id === id)) {
+      if(cart.find(item => item.catalog_id === id)) {
         setCart(
-          cart.map(item => item.id === id ? {...item, qty: item.qty - 1} : item)
+          cart.map(item => item.catalog_id === id ? {...item, jumlah: item.jumlah - 1} : item)
         )
       }
     }
@@ -40,12 +40,12 @@ const CardFoodDetail = ({ catalog }) => {
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
     })
 
-    if(cart.find(item => item.id === id)) {
+    if(cart.find(item => item.catalog_id === id)) {
       setCart(
-        cart.map(item => item.id === id ? {...item, qty: item.qty + 1 } : item)
+        cart.map(item => item.catalog_id === id ? {...item, jumlah: item.jumlah + 1 } : item)
       )
     } else {
-      setCart([...cart, {id: id, qty: 1}])
+      setCart([...cart, {catalog_id: id, jumlah: 1}])
     }
   }
 

@@ -7,6 +7,8 @@ import UsersTable from "./components/UsersTable";
 import Catalog from "./Pages/Catalog";
 import CatalogAddForm from "./Pages/CatalogAddForm";
 import CatalogEditForm from "./Pages/CatalogEditForm";
+import Order from "./Pages/Order";
+import OrderDetail from "./Pages/OrderDetail";
 
 const App = () => {
   return (
@@ -19,6 +21,8 @@ const App = () => {
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/catalog/add-catalog" element={<CatalogAddForm />} />
         <Route path="/catalog/edit-catalog/:id" element={<CatalogEditForm />} />
+        <Route path="/order" element={<Order />} />
+        <Route path="/order/:id" element={<OrderDetail />} />
       </Routes>
     </Router>
   );

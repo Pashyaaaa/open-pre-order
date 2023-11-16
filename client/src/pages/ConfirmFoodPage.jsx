@@ -18,8 +18,8 @@ const ConfirmFoodPage = () => {
         <div className="card_product_group">
           {
             cart.map(item => {
-              const catalog = catalogs.find(catalog => catalog.id === item.id)
-              const totalPrice = item.qty * catalog.harga
+              const catalog = catalogs.find(catalog => catalog.id === item.catalog_id)
+              const totalPrice = item.jumlah * catalog.harga
               return (
                 <CardFood catalog={catalog} basicPrice={catalog.harga} totalPrice={totalPrice} key={catalog.id} cart={item} />
               )
@@ -30,8 +30,8 @@ const ConfirmFoodPage = () => {
             <span>
               Rp {
                 cart.map(item => {
-                  const catalog = catalogs.find(catalog => catalog.id === item.id)
-                  const totalPrice = item.qty * catalog.harga
+                  const catalog = catalogs.find(catalog => catalog.id === item.catalog_id)
+                  const totalPrice = item.jumlah * catalog.harga
                   return totalPrice 
                 }).reduce((accumulator, currentvalue) => accumulator + currentvalue).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
               }

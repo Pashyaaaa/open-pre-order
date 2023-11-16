@@ -4,6 +4,7 @@ import FoodPage from "./pages/FoodPage";
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import FormUser from "./pages/FormUser";
+import Paymentpage from "./pages/PaymentPage";
 
 export const FoodsContext = createContext(null)
 export const CartContext = createContext(null)
@@ -31,6 +32,7 @@ const App = () => {
                 <Route path="/" element={<FoodPage />} />
                 <Route path="/confirm-order" element={<ConfirmFoodPage />} />
                 <Route path="/form-data-user" element={<FormUser />} />
+                <Route path="/payment" element={<Paymentpage />} />
               </Routes>
             </Router>
           </CartContext.Provider>

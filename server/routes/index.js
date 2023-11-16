@@ -38,7 +38,7 @@ router.get("/token", refreshToken);
 router.delete("/logout", Logout);
 
 // Catalog
-router.get("/catalog", getCatalog);
+router.get("/catalog", verifyToken, getCatalog);
 router.get("/catalog/all", getAllCatalog);
 router.get("/catalog/:id", getCatalogById);
 router.post("/catalog", createCatalog);

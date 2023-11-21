@@ -156,14 +156,16 @@ export const addOrder = async (req, res) => {
       // transaction token
       let transactionToken = transaction.token;
       console.log("transactionToken:", transactionToken);
+      res.json({
+        message: "Pesanan Berhasil",
+        order: order,
+        totalHarga: totalHarga,
+        token: transactionToken
+      });
     });
 
+
     // Mengembalikan total harga bersama dengan pesanan
-    res.json({
-      message: "Pesanan Berhasil",
-      order: order,
-      totalHarga: totalHarga,
-    });
   } catch (error) {
     console.log(error);
     res.status(500).json({

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import 'https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/datepicker.min.js'
 import { CartContext } from "../App";
@@ -7,6 +7,7 @@ import axios from 'axios';
 const FormUser = () => {
   const navigate = useNavigate()
   const { cart, setCart } = useContext(CartContext)
+  const [token, setToken] = useState('')
   const [order, setOrder] = useState({
     nama: "",
     whatsapp: "",
@@ -15,19 +16,76 @@ const FormUser = () => {
     order_detail: cart
   })
 
+  
+  
   const PostOrder = async(e) => {
     e.preventDefault()
+
+    const config = {
+      headers: {
+        "content-type": "application/json"
+      }
+    }
+
     try {
-      await axios.post('http://localhost:5000/order', order)
+      const response = await axios.post('http://localhost:5000/order', order, config)
+      setToken(response.data.token)
       setCart([])
-      navigate('/payment')
-      console.log(order)
+      console.log('Berhasil')
     } catch(error) {
       if(error.response) {
+        console.log('Gagal')
         setMessage(error.response.data.message)
       }
     }
   }
+
+  useEffect(() => {
+    if(token) {
+      window.snap.pay(token, {
+        onSuccess: (result) => {
+          localStorage.setItem("Pembayaran", JSON.stringify(result))
+          setToken('')
+        },
+        onPending: (result) => {
+          localStorage.setItem("Pembayaran", JSON.stringify(result))
+          setToken('')
+        },
+        onError: (error) => {
+          console.log(error)
+          setToken('')
+        },
+        onClose: () => {
+          console.log('Anda belum menyelesaikan pembayaran')
+          setToken('')
+        }
+      })
+      setOrder({
+        ...order,
+        nama: "",
+        whatsapp: "",
+        alamat: "",
+        tanggal_ambil: "",
+        order_detail: cart
+      })
+    }
+  }, [token])
+
+
+  useEffect(() => {
+    const midtransUrl = 'https://app.sandbox.midtrans.com/snap/snap.js'
+
+    let scriptTag = document.createElement("script")
+    scriptTag.src = midtransUrl
+
+    const midtransClientkey = "SB-Mid-server-WlNg4ce-wWgeQkFp1Z04oMg6"
+    scriptTag.setAttribute("data-client-key", midtransClientkey)
+
+    document.body.appendChild(scriptTag)
+    return () => {
+      document.body.removeChild(scriptTag)
+    }
+  }, [])
 
   return (
     <div className='pt-5 pb-10'>

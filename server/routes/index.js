@@ -38,8 +38,8 @@ router.get("/token", refreshToken);
 router.delete("/logout", Logout);
 
 // Catalog
-router.get("/catalog", verifyToken, verifyToken, getCatalog);
-router.get("/catalog/all", verifyToken, getAllCatalog);
+router.get("/catalog", getCatalog);
+router.get("/catalog/all", getAllCatalog);
 router.get("/catalog/:id", getCatalogById);
 router.post("/catalog", createCatalog);
 router.patch("/catalog/:id", updateCatalog);

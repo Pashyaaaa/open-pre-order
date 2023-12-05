@@ -20,11 +20,11 @@ Untuk bagian server maka lakukan perintah :
 
 ### Database Setting
 1. import openpo_db.sql
-2. DATABASE = openpo
-   DATABASE_HOST = localhost
-   DATABASE_USER = root
-   DATABASE_PASSWORD = 
-   DATABASE_DIALECT = mysql
+2. DATABASE = openpo,
+   DATABASE_HOST = localhost,
+   DATABASE_USER = root,
+   DATABASE_PASSWORD = '',
+   DATABASE_DIALECT = mysql,
 
 ## Proses Development
 ### Untuk mengaktifkan Server maka yang perlu dilakukan adalah :

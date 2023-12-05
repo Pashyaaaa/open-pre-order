@@ -21,7 +21,7 @@ Untuk bagian server maka lakukan perintah :
 ### Database Setting
 1. import openpo_db.sql pada software sql apapun (contoh: phpmyadmin)
 2. Tambahkan settingan database berikut di file .env
-   -DATABASE = openpo
+   -DATABASE = openpo,
    -DATABASE_HOST = localhost,
    -DATABASE_USER = root,
    -DATABASE_PASSWORD = '',

@@ -24,7 +24,7 @@ const Catalog = () => {
   }, [])
 
   const getCatalogs = async () => {
-    const response = await  axios.get('http://localhost:5000/catalog/all')
+    const response = await  axios.get(`${import.meta.env.VITE_API_URL}/catalog/all`)
     setCatalogs(response.data)
   }
 
@@ -33,7 +33,7 @@ const Catalog = () => {
 
     if(konfirmasi) {
       try {
-        await axios.delete(`http://localhost:5000/catalog/${catalogID}`)
+        await axios.delete(`${import.meta.env.VITE_API_URL}/catalog/${catalogID}`)
         getCatalogs()
       } catch (error) {
         console.log(error)

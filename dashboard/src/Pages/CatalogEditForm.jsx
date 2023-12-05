@@ -17,7 +17,7 @@ const CatalogEditForm = () => {
   }, [])
 
   const getCatalogByID = async () => {
-    const response = await axios.get(`http://localhost:5000/catalog/${id}`)
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/catalog/${id}`)
     setNama_Produk(response.data.nama_produk)
     setFile(response.data.gambar)
     setPreviewImg(response.data.url)
@@ -41,7 +41,7 @@ const CatalogEditForm = () => {
     formData.append('file', file)
 
     try {
-      await axios.patch(`http://localhost:5000/catalog/${id}`, formData, {
+      await axios.patch(`${import.meta.env.VITE_API_URL}/catalog/${id}`, formData, {
         headers: {
           "Content-type": "multipart/form-data"
         }

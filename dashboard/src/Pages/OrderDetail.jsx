@@ -13,11 +13,11 @@ const OrderDetail = () => {
   }, [])
   
   const getUsername = async () => {
-    const response = await axios.get(`http://localhost:5000/order/${id}`)
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/order/${id}`)
     setNamaUser(response.data.nama)
   }
   const getOrderDetails = async () => {
-    const response = await axios.get(`http://localhost:5000/order/${id}`)
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/order/${id}`)
     setOrderDetails(response.data.order_details)
   }
 

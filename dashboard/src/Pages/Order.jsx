@@ -11,7 +11,7 @@ const Order = () => {
   }, [])
 
   const getOrder = async () => {
-    const response = await axios.get('http://localhost:5000/order')
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/order`)
     setOrder(response.data)
   }
 

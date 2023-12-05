@@ -28,7 +28,7 @@ const FormUser = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/order', order, config)
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/order`, order, config)
       setToken(response.data.token)
       setCart([])
       console.log('Berhasil')
@@ -46,6 +46,7 @@ const FormUser = () => {
         onSuccess: (result) => {
           localStorage.setItem("Pembayaran", JSON.stringify(result))
           setToken('')
+          window.location.href = '/'
         },
         onPending: (result) => {
           localStorage.setItem("Pembayaran", JSON.stringify(result))

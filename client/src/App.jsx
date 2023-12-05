@@ -18,7 +18,7 @@ const App = () => {
   }, [])
 
   const getCatalogs = async () => {
-    const response = await axios.get('http://localhost:5000/catalog/all')
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/catalog/all`)
     setCatalogs(response.data)
   }
 

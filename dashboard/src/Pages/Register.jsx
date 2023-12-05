@@ -14,7 +14,7 @@ const Register = () => {
   const Register = async(e) => {
     e.preventDefault()
     try {
-      await axios.post('http://localhost:5000/users', {name, email, password, confPassword})
+      await axios.post(`${import.meta.env.VITE_API_URL}/users`, {name, email, password, confPassword})
       navigate('/')
     } catch(error) {
       if(error.response) {

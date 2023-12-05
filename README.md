@@ -29,13 +29,13 @@ Untuk bagian server maka lakukan perintah :
 ### Untuk mengaktifkan Dashboard maka yang perlu dilakukan adalah :
 1. Pergi ke folder Dashboard
 2. Lalu, buka terminal dan jalankan perintah `npm run dev`
-3. Lalu copy dan paste url [localhost](http://localhost:5173) pada browser
+3. Lalu copy dan paste url `http://localhost:5173` pada browser
 4. Dashboard sudah siap digunakan
 
 ### Untuk mengaktifkan Client maka yang perlu dilakukan adalah :
 1. Pergi ke folder Client
 2. Lalu, buka terminal dan jalankan perintah `npm run dev`
-3. Lalu copy dan paste url [localhost](http://localhost:5173) pada browser
+3. Lalu copy dan paste url `http://localhost:5173` pada browser
 4. Client sudah siap digunakan
 
 

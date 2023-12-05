@@ -18,6 +18,8 @@ Untuk bagian server maka lakukan perintah :
 1. cd client
 2. npm install
 
+### Database Setting
+1. import openpo_db.sql
 
 ## Proses Development
 ### Untuk mengaktifkan Server maka yang perlu dilakukan adalah :
